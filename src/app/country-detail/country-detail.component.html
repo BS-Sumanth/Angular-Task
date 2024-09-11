@@ -1,0 +1,36 @@
+<div class="container" *ngIf="country">
+  <button routerLink="/">← Back</button>
+  
+  <div class="country-detail">
+    <img [src]="country.flag" [alt]="country.name + ' flag'">
+    <div class="country-info">
+      <h1>{{ country.name }}</h1>
+      <div class="info-columns">
+        <div class="left-column">
+          <p><strong>Native Name:</strong> {{ country.nativeName }}</p>
+          <p><strong>Population:</strong> {{ country.population | number }}</p>
+          <p><strong>Region:</strong> {{ country.region }}</p>
+          <p><strong>Sub Region:</strong> {{ country.subregion }}</p>
+          <p><strong>Capital:</strong> {{ country.capital }}</p>
+        </div>
+        <div class="right-column">
+          <p><strong>Top Level Domain:</strong> {{ country.topLevelDomain.join(', ') }}</p>
+          <p><strong>Currencies:</strong> 
+            <span *ngFor="let currency of country.currencies | keyvalue; let i = index">
+              {{ currency.value.name }}<span *ngIf="i < (country.currencies | keyvalue).length - 1">, </span>
+            </span>
+          </p>
+          <p><strong>Languages:</strong> 
+            <span *ngFor="let language of country.languages | keyvalue; let i = index">
+              {{ language.value.name }}<span *ngIf="i < (country.languages | keyvalue).length - 1">, </span>
+            </span>
+          </p>
+        </div>
+      </div>
+      <div class="border-countries" *ngIf="country.borders">
+        <strong>Border Countries:</strong>
+        <span *ngFor="let border of country.borders" class="border-country">{{ border }}</span>
+      </div>
+    </div>
+  </div>
+</div>

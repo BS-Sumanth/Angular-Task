@@ -1,0 +1,34 @@
+<div class="container">
+    <h1>Where in the world?</h1>
+    
+    <div class="filters">
+      <input 
+        [(ngModel)]="filterText" 
+        (ngModelChange)="filterCountries()" 
+        placeholder="Search for a country..."
+      >
+      <select 
+        [(ngModel)]="selectedRegion" 
+        (ngModelChange)="onRegionChange($event)"
+      >
+        <option value="">Filter by Region</option>
+        <option value="Africa">Africa</option>
+        <option value="Americas">Americas</option>
+        <option value="Asia">Asia</option>
+        <option value="Europe">Europe</option>
+        <option value="Oceania">Oceania</option>
+      </select>
+    </div>
+  
+    <div class="country-grid">
+      <div *ngFor="let country of filteredCountries" class="country-card" [routerLink]="['/country', country.name]">
+        <img [src]="country.flag" [alt]="country.name + ' flag'">
+        <div class="country-info">
+          <h2>{{ country.name }}</h2>
+          <p><strong>Population:</strong> {{ country.population | number }}</p>
+          <p><strong>Region:</strong> {{ country.region }}</p>
+          <p><strong>Capital:</strong> {{ country.capital }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
